@@ -10,17 +10,25 @@ import lombok.Setter;
 @Data
 @Entity
 @Table(name = "student")
-public class Teacher {
+public class Student {
 
     @Id
     private long id;
 
     @Column(nullable = false)
-    private String qualifications;
+    private String grade;
 
-    public Teacher(long id, String qualifications) {
+    @Column(nullable = false)
+    private String testScores;
+
+    public Student(){
+    }
+    public Student(Long id, String grade, String testScores) {
+
         this.id = id;
-        this.qualifications = qualifications;
+        this.grade = grade;
+        this.testScores = testScores;
+
     }
 
 }
