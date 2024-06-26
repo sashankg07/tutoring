@@ -23,7 +23,7 @@ CREATE TABLE public.login
 
 ALTER TABLE IF EXISTS public.login
     OWNER to tutoring;
-    
+
 INSERT INTO public.login(
 	id, first_name, last_name, email_id, password)
 	VALUES (1001, 'Saash', 'Gadi', 'a@b.com', 'abcd1234');

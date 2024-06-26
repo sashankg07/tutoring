@@ -2,7 +2,9 @@ package com.nivesha.tutoring.controller;
 
 import com.nivesha.tutoring.dal.Login;
 import com.nivesha.tutoring.dal.LoginRepository;
+import com.nivesha.tutoring.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +15,10 @@ import java.util.Optional;
 @RequestMapping("/api/v1")
 public class LoginController {
 
-    private final LoginRepository studentService;
+    private final LoginService loginService;
     @Autowired
-    public LoginController(LoginRepository serviceLayer) {
-        this.studentService = serviceLayer;
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
     }
 
     /**
@@ -26,9 +28,15 @@ public class LoginController {
      * @return the ResponseEntity with status 200 (OK) and with body of the new product
      */
     @PostMapping("/student")
-    public ResponseEntity<Login> saveStudent(@RequestBody Login login) {
-        Login newLogin = studentService.save(login);
-        return ResponseEntity.ok(newLogin);
+    public ResponseEntity<Object> saveStudent(@RequestBody Login login) {
+        try {
+            loginService.save(login);
+        } catch(Exception ex) {
+            System.out.println("failed to create account, error=" + ex.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**
@@ -38,12 +46,12 @@ public class LoginController {
      */
     @GetMapping("/students")
     public List<Login> getAllStudents() {
-        return studentService.findAll();
+        return loginService.findAll();
     }
 
     @GetMapping("/student/{id}")
-    public Optional<Login> getAllStudents(@PathVariable("id") long id) {
-        return studentService.findById(id);
+    public Optional<Login> getStudent(@PathVariable("id") long id) {
+        return loginService.findById(id);
     }
 
 

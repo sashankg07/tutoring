@@ -29,7 +29,9 @@ public class Login {
 
     public Login(){
     }
-    public Login(String first, String last, String emailId, String password, String grade) {
+
+
+    public Login(String first, String last, String emailId, String password, boolean isStuduent) {
         this.emailId = emailId;
         this.password = password;
         this.firstName = first;
