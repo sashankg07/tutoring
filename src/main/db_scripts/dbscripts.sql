@@ -1,15 +1,19 @@
 
-DROP DATABASE IF EXISTS tutoring;
+Database: tutoring-db
 
-CREATE DATABASE tutoring
+DROP DATABASE IF EXISTS tutoring-db;
+
+CREATE DATABASE tutoring-db
     WITH
-    OWNER = postgres
+    OWNER = admin
     ENCODING = 'UTF8'
-    LOCALE_PROVIDER = 'libc'
+    LC_COLLATE = 'en_US.utf8'
+    LC_CTYPE = 'en_US.utf8'
+    TABLESPACE = pg_default
     CONNECTION LIMIT = -1
     IS_TEMPLATE = False;
 
-CREATE USER tutoring WITH PASSWORD 'admin';
+CREATE USER admin WITH PASSWORD 'admin';
 
 CREATE TABLE public.login
 (
@@ -22,7 +26,7 @@ CREATE TABLE public.login
 );
 
 ALTER TABLE IF EXISTS public.login
-    OWNER to tutoring;
+    OWNER to admin;
 
 INSERT INTO public.login(
 	id, first_name, last_name, email_id, password)

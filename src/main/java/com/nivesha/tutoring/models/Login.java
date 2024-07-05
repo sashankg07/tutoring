@@ -1,4 +1,4 @@
-package com.nivesha.tutoring.dal;
+package com.nivesha.tutoring.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
